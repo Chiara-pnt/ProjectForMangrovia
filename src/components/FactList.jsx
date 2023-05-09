@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useCatFacts } from "../lib/useCatFacts";
 import { Card, Icon, Grid, Container, Button } from "semantic-ui-react";
 import { SideList } from "./SideList";
+import { Loader } from "./Loader";
 
 export const FactList = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -10,6 +11,8 @@ export const FactList = () => {
   const { list, isLoading, hasNextPage, hasPrevPage } =
     useCatFacts(currentPage);
 
+  //Receives id from caller method and stores id and fact data in the state
+  //deals the bookmark selection and deselection
   const handleClick = (id) => {
     const item = list.find((item) => item.id === id);
     if (item) {
@@ -23,12 +26,14 @@ export const FactList = () => {
     }
   };
 
+  //loads next pages
   const handleNextPage = () => {
     if (hasNextPage) {
       setCurrentPage(currentPage + 1);
     }
   };
 
+  //goes back to previous pages
   const handlePrevPage = () => {
     if (hasPrevPage) {
       setCurrentPage(currentPage - 1);
@@ -38,7 +43,7 @@ export const FactList = () => {
   return (
     <Container style={{ display: "flex", flexDirection: "row" }}>
       {isLoading ? (
-        "Loading"
+        <Loader />
       ) : (
         <Container>
           <Grid
@@ -48,7 +53,13 @@ export const FactList = () => {
           >
             {list.map((i) => (
               <Grid.Column key={i.id}>
-                <Card style={{ height: 200 }}>
+                <Card
+                  style={{
+                    height: "200px",
+                    border: "1px solid lightGrey",
+                    boxShadow: "3px 4px 5px lightGrey",
+                  }}
+                >
                   <Card.Content header={`#fact ${i.id}`} />
                   <Card.Content
                     description={i.fact}
