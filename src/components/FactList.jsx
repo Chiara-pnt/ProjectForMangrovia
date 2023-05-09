@@ -28,22 +28,20 @@ export const FactList = () => {
 
   //loads next pages
   const handleNextPage = () => {
-    if (hasNextPage) {
-      setCurrentPage(currentPage + 1);
-    }
+    setCurrentPage(currentPage + 1);
   };
 
   //goes back to previous pages
   const handlePrevPage = () => {
-    if (hasPrevPage) {
-      setCurrentPage(currentPage - 1);
-    }
+    setCurrentPage(currentPage - 1);
   };
 
   return (
     <Container style={{ display: "flex", flexDirection: "row" }}>
       {isLoading ? (
-        <Loader />
+        <Container style={{ minWidth: "80%" }}>
+          <Loader />
+        </Container>
       ) : (
         <Container>
           <Grid

@@ -1,5 +1,9 @@
-import { Container } from "semantic-ui-react";
+import { Segment, Dimmer } from "semantic-ui-react";
 
 export const Loader = () => {
-  <Container style={{ maxWidth: "85%" }}>Loading...</Container>;
+  <Segment>
+    <Dimmer active inverted>
+      <Loader size="large">Loading</Loader>
+    </Dimmer>
+  </Segment>;
 };

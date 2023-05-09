@@ -20,8 +20,8 @@ export const SideList = ({ bookmarkedItems }) => {
       </Header>
       <List.Item>
         {bookmarkedItems.map((item, index) => (
-          <List.Header style={{ marginBottom: "20px" }}>
-            <List.Item key={index}>
+          <List.Header style={{ marginBottom: "20px" }} key={index}>
+            <List.Item>
               <List.Header>- {item}</List.Header>
             </List.Item>
           </List.Header>
