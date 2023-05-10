@@ -3,7 +3,7 @@ import { Segment, Dimmer } from "semantic-ui-react";
 export const Loader = () => {
   <Segment>
     <Dimmer active inverted>
-      <Loader size="large">Loading</Loader>
+      <Loader inverted content="Loading" />
     </Dimmer>
   </Segment>;
 };
