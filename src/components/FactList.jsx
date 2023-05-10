@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { useCatFacts } from "../lib/useCatFacts";
-import { Card, Icon, Grid, Container, Button } from "semantic-ui-react";
+import { Card, Icon, Grid, Container } from "semantic-ui-react";
 import { SideList } from "./SideList";
 import { Loader } from "./Loader";
+import { ButtonPrev } from "./ButtonPrev";
+import { ButtonNext } from "./ButtonNext";
 
 export const FactList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [bookmarkedItems, setBookmarkedItems] = useState([]);
 
+  //custom hook destructured and called
   const { list, isLoading, hasNextPage, hasPrevPage } =
     useCatFacts(currentPage);
 
@@ -53,7 +56,7 @@ export const FactList = () => {
               <Grid.Column key={i.id}>
                 <Card
                   style={{
-                    height: "200px",
+                    height: "230px",
                     border: "1px solid lightGrey",
                     boxShadow: "3px 4px 5px lightGrey",
                   }}
@@ -63,11 +66,11 @@ export const FactList = () => {
                     description={i.fact}
                     style={{ overflow: "auto" }}
                   />
-                  <Card.Content
-                    extra
-                    style={{ position: "relative", minHeight: "40px" }}
-                  >
+                  <Card.Content extra style={{ height: "50px" }}>
                     <Icon
+                      style={{
+                        position: "relative",
+                      }}
                       name={
                         bookmarkedItems.includes(i.fact)
                           ? "bookmark"
@@ -80,31 +83,9 @@ export const FactList = () => {
               </Grid.Column>
             ))}
 
-            {hasPrevPage ? (
-              <Button
-                onClick={handlePrevPage}
-                style={{ margin: "auto", marginTop: "20px" }}
-              >
-                <Icon name="angle double left" />
-                Prev Page
-              </Button>
-            ) : (
-              ""
-            )}
-            {hasNextPage ? (
-              <Button
-                onClick={handleNextPage}
-                style={{ margin: "auto", marginTop: "20px" }}
-              >
-                Next Page
-                <Icon
-                  name="angle double right"
-                  style={{ marginLeft: "10px" }}
-                />
-              </Button>
-            ) : (
-              ""
-            )}
+            {hasPrevPage && <ButtonPrev handlePrevPage={handlePrevPage} />}
+
+            {hasNextPage && <ButtonNext handleNextPage={handleNextPage} />}
           </Grid>
         </Container>
       )}
